@@ -1,22 +1,40 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: demo-app
+  name: sso
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: demo-app
+      app: sso
   template:
     metadata:
       labels:
-        app: demo-app
+        app: sso
     spec:
       containers:
-        - name: demo-app
+        - name: sso
           image: pepsicoad.azurecr.io/fastapi-azure-auth-demo
           ports:
             - containerPort: 8000
           envFrom:
             - secretRef:
-                name: demo-app
+                name: sso
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: sso
+  name: sso
+spec:
+  ipFamilies:
+    - IPv4
+  ports:
+    - name: 8000-tcp
+      port: 80
+      protocol: TCP
+      targetPort: 8000
+  selector:
+    app: sso
+  type: NodePort

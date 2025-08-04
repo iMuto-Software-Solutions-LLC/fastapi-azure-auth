@@ -51,7 +51,7 @@ if settings.BACKEND_CORS_ORIGINS:  # pragma: no cover
 app.include_router(
     api_router_azure_auth,
     prefix=settings.API_V1_STR,
-    dependencies=[Security(azure_scheme, scopes=['user_impersonation'])],
+    dependencies=[Security(azure_scheme)],
 )
 app.include_router(
     api_router_multi_auth,
