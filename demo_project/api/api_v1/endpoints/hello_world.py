@@ -2,7 +2,7 @@ from typing import Dict, Union
 
 from demo_project.api.dependencies import azure_scheme
 from demo_project.schemas.hello_world import HelloWorldResponse
-from fastapi import APIRouter, Depends, Request
+from fastapi import APIRouter, Request, Security
 
 from fastapi_azure_auth.user import User
 
@@ -15,7 +15,7 @@ router = APIRouter()
     summary='Say hello',
     name='hello_world',
     operation_id='helloWorld',
-    dependencies=[Depends(azure_scheme)],
+    dependencies=[Security(azure_scheme)],
 )
 async def world(request: Request) -> Dict[str, Union[str, User]]:
     """

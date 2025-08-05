@@ -31,7 +31,7 @@ app = FastAPI(
         'additionalQueryStringParams': {'prompt': 'consent'},
     },
     version='1.0.0',
-    description='## Welcome to my API! \n This is my description, written in `markdown`',
+    description='## FastAPI Azure Auth Demo',
     title=settings.PROJECT_NAME,
     lifespan=lifespan,
 )
